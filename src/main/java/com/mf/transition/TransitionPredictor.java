@@ -5,11 +5,12 @@ import com.mf.MeanAveragePrecissionAtK;
 import com.mf.Predictor;
 import com.mf.Products;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
-import static com.mf.Products.*;
-import static com.mf.Products.IND_CCO_FIN_ULT1;
 import static java.util.stream.Collectors.toList;
 import static java.util.stream.Collectors.toMap;
 
@@ -21,11 +22,6 @@ public class TransitionPredictor extends Predictor {
     private Map<Products, List<Products>> sortedTransitions;
 
     private Map<Products, ProductsTransition> allTransitions = new HashMap<>();
-
-
-    List<String> mostCommonProducts = Arrays.asList(IND_CCO_FIN_ULT1, IND_CTOP_FIN_ULT1, IND_RECIBO_ULT1, IND_ECUE_FIN_ULT1,
-            IND_CNO_FIN_ULT1, IND_RECA_FIN_ULT1, IND_TJCR_FIN_ULT1);
-
 
     @Override
     public Map<Integer, List<String>> predict() {
@@ -57,7 +53,7 @@ public class TransitionPredictor extends Predictor {
         }
         //adding most common
         if (result.size() < MeanAveragePrecissionAtK.SEVEN) {
-            result.addAll(mostCommonProducts.subList(0, MeanAveragePrecissionAtK.SEVEN - result.size()));
+            result.addAll(Products.MOST_COMMON_PRODUCTS.subList(0, MeanAveragePrecissionAtK.SEVEN - result.size()));
         }
         return result;
     }
