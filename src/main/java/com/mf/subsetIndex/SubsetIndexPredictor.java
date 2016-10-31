@@ -19,10 +19,11 @@ public class SubsetIndexPredictor extends Predictor {
     @Override
     public Map<Integer, List<String>> predict() {
         prepare();
-        return testClients.entrySet().stream().collect(Collectors.toMap(
-                e -> e.getKey(),
-                e -> random(COUNT))
-        );
+        return null;
+//        return testClients.entrySet().stream().collect(Collectors.toMap(
+//                e -> e.getKey(),
+//                e -> random(COUNT))
+//        );
     }
 
     private void prepare() {

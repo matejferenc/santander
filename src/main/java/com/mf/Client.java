@@ -9,9 +9,29 @@ public class Client {
 
     public final Products products;
 
+    public final Date date;
+
     public final int ncodpers;
 
-    public final Date date;
+    public String ind_empleado;
+
+    public StringBuilder pais_residencia;
+
+    public String sexo;
+
+    public int age;
+
+    public String ind_nuevo;
+
+    public int antiguedad;
+
+    public String conyuemp;
+
+    public String cod_prov;
+
+    public int renta;
+
+    public String segmento;
 
     public Client(Date date, int ncodpers, Products products) {
         this.date = date;

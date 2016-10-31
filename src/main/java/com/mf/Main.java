@@ -36,9 +36,12 @@ public class Main {
         Map<Products, Integer> productsCount = new HashMap<>();
         TrainTestSplitter trainTestSplitter = new TrainTestSplitter();
         Map<String, Integer> productCounts = new HashMap<>();
+        Map<Integer, Map<String, Integer>> countsOfProductsByAge = new HashMap<>();
         while ((nextLine = reader.readNext()) != null) {
             int ncodpers = Integer.valueOf(nextLine[1].trim());
             Date date = dateFormat.parse(nextLine[0].trim());
+            String ageString = nextLine[5].trim();
+            int age = ageString.matches("[0-9]+") ? Integer.parseInt(ageString) : -1;
             clientsForDate.put(date, clientsForDate.get(date) == null ? 1 : clientsForDate.get(date) + 1);
             clients.add(ncodpers);
             Products products = new Products(nextLine[24],
@@ -80,6 +83,17 @@ public class Main {
 
             trainTestSplitter.addClient(client);
 
+            Map<String, Integer> productCounts1 = countsOfProductsByAge.get(age);
+            if (productCounts1 == null) {
+                productCounts1 = new HashMap<>();
+                countsOfProductsByAge.put(age, productCounts1);
+            }
+            Map<String, Integer> finalProductCounts = productCounts1;
+            products.toList().forEach(product -> {
+                finalProductCounts.putIfAbsent(product, 0);
+                finalProductCounts.put(product, finalProductCounts.get(product) + 1);
+            });
+
             total++;
             if (total % 100000 == 0) {
                 System.out.println("Processed: " + total);
@@ -94,9 +108,22 @@ public class Main {
 
         System.out.println("Different product compositions: " + productsCount.size());
         System.out.println("Top favourite products");
-        productsCount.entrySet().stream().sorted((a, b) -> b.getValue() - a.getValue()).limit(100).forEach(System.out::println);
+        productsCount.entrySet().stream().sorted((a, b) -> b.getValue() - a.getValue()).limit(10).forEach(System.out::println);
 
         System.out.println("Counts of products:");
         productCounts.entrySet().stream().sorted((a, b) -> b.getValue() - a.getValue()).forEach(System.out::println);
+
+        System.out.println("Counts of products by age:");
+        countsOfProductsByAge.entrySet().stream().sorted((a, b) -> a.getKey() - b.getKey()).forEach(e -> {
+            StringBuilder sb = new StringBuilder("" + e.getKey());
+            Products.ALL.forEach(product -> {
+                if (e.getValue().containsKey(product)) {
+                    sb.append("\t" + e.getValue().get(product));
+                } else {
+                    sb.append("\t0");
+                }
+            });
+            System.out.println(sb.toString());
+        });
     }
 }
