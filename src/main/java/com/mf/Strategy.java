@@ -93,16 +93,19 @@ public abstract class Strategy {
 
     public void execute() throws Exception {
         long startTime = System.currentTimeMillis();
-        readTrain();
-        readTest();
-        if (isValidate()) {
-            validate();
+        try {
+            readTrain();
+            readTest();
+            if (isValidate()) {
+                validate();
+            }
+            if (isPredict()) {
+                predict();
+            }
+        } finally {
+            long endTime = System.currentTimeMillis();
+            System.out.println("Execution time: " + (endTime - startTime) / (double) 1000 + " seconds");
         }
-        if (isPredict()) {
-            predict();
-        }
-        long endTime = System.currentTimeMillis();
-        System.out.println("Execution time: " + (endTime - startTime) / (double) 1000 + " seconds");
     }
 
     protected abstract boolean isPredict();
@@ -145,6 +148,7 @@ public abstract class Strategy {
                     nextLine[47]);
             Date date = dateFormat.parse(nextLine[0].trim());
             Client client = new Client(date, ncodpers, products);
+            setClientAttributes(nextLine, client);
             if (TrainTestSplitter.may2016.equals(date)) {
                 validationClients.add(client);
             } else {
@@ -158,6 +162,18 @@ public abstract class Strategy {
         System.out.println("Training set total: " + total);
     }
 
+    private void setClientAttributes(String[] nextLine, Client client) {
+        client.ind_empleado = nextLine[2].trim();
+        client.pais_residencia = nextLine[3].trim();
+        client.age = nextLine[5].trim().matches("[0-9]+") ? Integer.parseInt(nextLine[5].trim()) : null;
+        client.ind_nuevo = nextLine[7].trim().equals("1");
+        client.antiguedad = nextLine[8].trim().matches("[0-9]+") ? Integer.parseInt(nextLine[8].trim()) : null;
+        client.conyuemp = nextLine[15].trim().equals("1");
+        client.cod_prov = nextLine[19].trim();
+        client.renta = nextLine[22].trim().matches("[0-9\\.]+") ? (int) Double.parseDouble(nextLine[22].trim()) : null;
+        client.segmento = nextLine[23].trim();
+    }
+
     private void readTest() throws Exception {
         File file = new File(this.getClass().getClassLoader().getResource(Main.TEST_PATH).getFile());
         CSVReader reader = new CSVReader(new FileReader(file));
@@ -168,6 +184,7 @@ public abstract class Strategy {
             int ncodpers = Integer.valueOf(nextLine[1].trim());
             Date date = dateFormat.parse(nextLine[0].trim());
             Client client = new Client(date, ncodpers, null);
+            setClientAttributes(nextLine, client);
             testClients.add(client);
             total++;
             if (total % 100000 == 0) {

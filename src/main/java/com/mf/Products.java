@@ -59,6 +59,9 @@ public class Products {
             IND_NOM_PENS_ULT1,
             IND_RECIBO_ULT1);
 
+    public static List<String> MOST_COMMON_PRODUCTS = Arrays.asList(IND_CCO_FIN_ULT1, IND_CTOP_FIN_ULT1, IND_RECIBO_ULT1, IND_ECUE_FIN_ULT1,
+            IND_CNO_FIN_ULT1, IND_RECA_FIN_ULT1, IND_TJCR_FIN_ULT1);
+
     public boolean ind_ahor_fin_ult1;
     public boolean ind_aval_fin_ult1;
     public boolean ind_cco_fin_ult1;
