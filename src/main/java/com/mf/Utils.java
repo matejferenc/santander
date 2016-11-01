@@ -17,4 +17,8 @@ public class Utils {
                         e -> e
                 ));
     }
+
+    public static boolean randomBoolean() {
+        return Math.random() < 0.5;
+    }
 }

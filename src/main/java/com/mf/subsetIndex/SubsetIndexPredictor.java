@@ -48,7 +48,7 @@ public class SubsetIndexPredictor extends Predictor {
         trainClients.forEach(client -> {
             String hash = Index.createHash(client);
             countsByIndex.putIfAbsent(hash, new HashMap<>());
-            Products.ALL.forEach(product -> {
+            client.products.toList().forEach(product -> {
                 Map<String, Integer> productCountsForHash = countsByIndex.get(hash);
                 productCountsForHash.putIfAbsent(product, 0);
                 productCountsForHash.put(product, productCountsForHash.get(product) + 1);

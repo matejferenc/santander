@@ -32,6 +32,7 @@ public abstract class Strategy {
     }
 
     private void predict() throws Exception {
+        readTest();
         Predictor predictor = createPredictor();
         predictor.addTrainClients(trainClients);
         predictor.addTrainClients(validationClients);
@@ -95,7 +96,6 @@ public abstract class Strategy {
         long startTime = System.currentTimeMillis();
         try {
             readTrain();
-            readTest();
             if (isValidate()) {
                 validate();
             }

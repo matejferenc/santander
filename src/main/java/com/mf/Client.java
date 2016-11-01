@@ -13,25 +13,7 @@ public class Client {
 
     public final int ncodpers;
 
-    public String ind_empleado;
-
-    public StringBuilder pais_residencia;
-
     public String sexo;
-
-    public int age;
-
-    public String ind_nuevo;
-
-    public int antiguedad;
-
-    public String conyuemp;
-
-    public String cod_prov;
-
-    public int renta;
-
-    public String segmento;
 
     public String ind_empleado;
 

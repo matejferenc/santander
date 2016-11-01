@@ -14,7 +14,7 @@ public class SubsetIndex extends Strategy {
 
     @Override
     protected boolean isPredict() {
-        return true;
+        return false;
     }
 
     @Override
