@@ -17,7 +17,12 @@ import static com.mf.Products.*;
  */
 public class SubsetIndexPredictor extends Predictor {
 
-    Map<String, List<String>> productsByIndexSorted = new HashMap<>();
+    private Map<String, List<String>> productsByIndexSorted = new HashMap<>();
+    private Index index;
+
+    public SubsetIndexPredictor(Index index) {
+        this.index = index;
+    }
 
     @Override
     public Map<Integer, List<String>> predict() {
@@ -31,7 +36,7 @@ public class SubsetIndexPredictor extends Predictor {
     }
 
     private List<String> predict(Client client) {
-        List<String> mostCommonProducts = productsByIndexSorted.get(Index.createHash(client));
+        List<String> mostCommonProducts = productsByIndexSorted.get(index.createHash(client));
         if (mostCommonProducts == null) {
             return Products.MOST_COMMON_PRODUCTS;
         } else {
@@ -46,7 +51,7 @@ public class SubsetIndexPredictor extends Predictor {
     private void prepare() {
         Map<String, Map<String, Integer>> countsByIndex = new HashMap<>();
         trainClients.forEach(client -> {
-            String hash = Index.createHash(client);
+            String hash = index.createHash(client);
             countsByIndex.putIfAbsent(hash, new HashMap<>());
             client.products.toList().forEach(product -> {
                 Map<String, Integer> productCountsForHash = countsByIndex.get(hash);

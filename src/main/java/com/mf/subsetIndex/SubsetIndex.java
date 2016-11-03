@@ -24,7 +24,13 @@ public class SubsetIndex extends Strategy {
 
     @Override
     public Predictor createPredictor() {
-        return new SubsetIndexPredictor();
+        Index index = new Index();
+        index.pais_residenciaPresent = true;
+        index.sexoPresent = true;
+        index.agePresent = true;
+        index.ind_nuevoPresent = true;
+//        return new SubsetIndexPredictor(index);
+        return new MultipleIndexPredictor();
     }
 
 }

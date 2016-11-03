@@ -41,7 +41,7 @@ public abstract class Strategy {
         generateOutput(predictor.predict());
     }
 
-    private void validate() throws Exception {
+    protected double validate() throws Exception {
         Predictor predictor = createPredictor();
         setValidationClients(predictor);
         assertClientsAre(predictor.testClients, TrainTestSplitter.may2016);
@@ -53,6 +53,7 @@ public abstract class Strategy {
         Map<Integer, List<String>> correct = getCorrectProducts(aprilClients, predictor.testClients);
         double map7 = new MeanAveragePrecissionAtK().evaluate(predicted, correct, MeanAveragePrecissionAtK.SEVEN);
         System.out.println("Mean average precision @ 7: " + map7);
+        return map7;
     }
 
     private void assertClientsAre(Map<Integer, Client> clients, Date date) {
@@ -114,7 +115,7 @@ public abstract class Strategy {
 
     public abstract Predictor createPredictor();
 
-    private void readTrain() throws Exception {
+    protected void readTrain() throws Exception {
         File file = new File(this.getClass().getClassLoader().getResource(Main.TRAIN_PATH).getFile());
         CSVReader reader = new CSVReader(new FileReader(file));
         String[] nextLine;
@@ -170,7 +171,7 @@ public abstract class Strategy {
         client.antiguedad = nextLine[8].trim().matches("[0-9]+") ? Integer.parseInt(nextLine[8].trim()) : null;
         client.conyuemp = nextLine[15].trim().equals("1");
         client.cod_prov = nextLine[19].trim();
-        client.renta = nextLine[22].trim().matches("[0-9\\.]+") ? (int) Double.parseDouble(nextLine[22].trim()) : null;
+        client.renta = nextLine[22].trim().matches("[0-9\\.]+") ? (int) (Double.parseDouble(nextLine[22].trim()) / 1000) : null;
         client.segmento = nextLine[23].trim();
     }
 
