@@ -18,14 +18,14 @@ public class MultipleIndexPredictor extends Predictor {
     private Map<Index, Map<String, Map<String, Integer>>> countsForAllIndexes;
 
     public MultipleIndexPredictor() {
-        indexes.add(new Index(true, true, true, true, false, false, false, false, false, true, false, false));
-        //indexes.add(new Index(true, false, true, true, false, false, false, false, false, false, false, false));
-//        indexes.add(new Index(true, false, true, true, false, false, false, false, false, true, false, false));
-        indexes.add(new Index(true, false, true, true, false, false, false, false, false, true, false, true));
-        indexes.add(new Index(true, false, true, true, false, false, false, false, false, true, true, false));
-        indexes.add(new Index(true, false, true, true, false, true, false, false, false, true, false, false));
-        indexes.add(new Index(true, true, true, true, false, false, false, false, false, true, false, false));
-        indexes.add(new Index(true, false, true, true, false, false, true, false, false, true, false, false));
+        indexes.add(new Index.IndexBuilder().pais_residencia().sexo().age().segmento().ind_nuevo().ind_empleado().ind_actividad_cliente().indresi().build());//pridat actividad_cliente a indresi
+        indexes.add(new Index.IndexBuilder().pais_residencia().sexo().age().segmento().nomprov().build());
+        indexes.add(new Index.IndexBuilder().pais_residencia().sexo().age().segmento().ncodpers().build());
+        indexes.add(new Index.IndexBuilder().pais_residencia().sexo().age().segmento().antiguedad().build());
+        indexes.add(new Index.IndexBuilder().pais_residencia().sexo().age().segmento().conyuemp().build());
+        indexes.add(new Index.IndexBuilder().pais_residencia().sexo().age().segmento().ind_empleado().build());
+        indexes.add(new Index.IndexBuilder().pais_residencia().sexo().age().segmento().build());
+        indexes.add(new Index.IndexBuilder().sexo().age().segmento().build());
     }
 
     @Override

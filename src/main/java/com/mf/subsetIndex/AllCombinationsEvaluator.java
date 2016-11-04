@@ -36,7 +36,7 @@ public class AllCombinationsEvaluator extends Strategy {
         long startTime = System.currentTimeMillis();
         try {
             readTrain();
-            for (int i = 0; i < 100; i++) {
+            for (int i = 0; i < 30; i++) {
                 long partStartTime = System.currentTimeMillis();
                 index = Index.random();
                 System.out.println(index);

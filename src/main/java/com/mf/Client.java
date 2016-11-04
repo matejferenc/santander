@@ -25,11 +25,15 @@ public class Client {
 
     public Integer antiguedad;
 
+    public String indresi;
+
     public boolean conyuemp;
 
     public String cod_prov;
 
     public String nomprov;
+
+    public boolean ind_actividad_cliente;
 
     public Integer renta;
 

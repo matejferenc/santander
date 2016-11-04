@@ -169,9 +169,11 @@ public abstract class Strategy {
         client.age = nextLine[5].trim().matches("[0-9]+") ? Integer.parseInt(nextLine[5].trim()) : null;
         client.ind_nuevo = nextLine[7].trim().equals("1");
         client.antiguedad = nextLine[8].trim().matches("[0-9]+") ? Integer.parseInt(nextLine[8].trim()) : null;
+        client.indresi = nextLine[13].trim();
         client.conyuemp = nextLine[15].trim().equals("1");
         client.cod_prov = nextLine[19].trim();
         client.nomprov = nextLine[20].trim();
+        client.ind_actividad_cliente = nextLine[21].trim().equals("1");
         client.renta = nextLine[22].trim().matches("[0-9\\.]+") ? (int) (Double.parseDouble(nextLine[22].trim()) / 1000) : null;
         client.segmento = nextLine[23].trim();
     }

@@ -60,7 +60,7 @@ public class TransitionPredictor extends Predictor {
 
     private void prepare() {
         Map<Integer, List<Client>> clientsById = new HashMap<>();
-        trainClients.stream().forEach(e -> {
+        trainClients.forEach(e -> {
             if (!clientsById.containsKey(e.ncodpers)) {
                 clientsById.put(e.ncodpers, new ArrayList<>());
             }

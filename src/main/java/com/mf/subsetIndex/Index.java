@@ -27,6 +27,8 @@ public class Index {
 
     boolean cod_provPresent;
 
+    boolean ind_actividad_clientePresent;
+
     boolean rentaPresent;
 
     boolean segmentoPresent;
@@ -35,22 +37,113 @@ public class Index {
 
     boolean nomprovPresent;
 
-    public Index(boolean sexoPresent, boolean ind_empleadoPresent, boolean pais_residenciaPresent,
-                 boolean agePresent, boolean ind_nuevoPresent, boolean antiguedadPresent,
-                 boolean conyuempPresent, boolean cod_provPresent, boolean rentaPresent, boolean segmentoPresent,
-                 boolean ncodpersPresent, boolean nomprovPresent) {
-        this.sexoPresent = sexoPresent;
-        this.ind_empleadoPresent = ind_empleadoPresent;
-        this.pais_residenciaPresent = pais_residenciaPresent;
-        this.agePresent = agePresent;
-        this.ind_nuevoPresent = ind_nuevoPresent;
-        this.antiguedadPresent = antiguedadPresent;
-        this.conyuempPresent = conyuempPresent;
-        this.cod_provPresent = cod_provPresent;
-        this.rentaPresent = rentaPresent;
-        this.segmentoPresent = segmentoPresent;
-        this.ncodpersPresent = ncodpersPresent;
-        this.nomprovPresent = nomprovPresent;
+    boolean indresiPresent;
+
+    public static class IndexBuilder {
+
+        private boolean sexo;
+        private boolean ind_empleado;
+        private boolean pais_residencia;
+        private boolean age;
+        private boolean ind_nuevo;
+        private boolean antiguedad;
+        private boolean indresi;
+        private boolean conyuemp;
+        private boolean cod_prov;
+        private boolean ind_actividad_cliente;
+        private boolean renta;
+        private boolean segmento;
+        private boolean ncodpers;
+        private boolean nomprov;
+
+        public IndexBuilder sexo() {
+            sexo = true;
+            return this;
+        }
+
+        public IndexBuilder ind_empleado() {
+            ind_empleado = true;
+            return this;
+        }
+
+        public IndexBuilder pais_residencia() {
+            pais_residencia = true;
+            return this;
+        }
+
+        public IndexBuilder age() {
+            age = true;
+            return this;
+        }
+
+        public IndexBuilder ind_nuevo() {
+            ind_nuevo = true;
+            return this;
+        }
+
+        public IndexBuilder antiguedad() {
+            antiguedad = true;
+            return this;
+        }
+
+        public IndexBuilder indresi() {
+            indresi = true;
+            return this;
+        }
+
+        public IndexBuilder conyuemp() {
+            conyuemp = true;
+            return this;
+        }
+
+        public IndexBuilder cod_prov() {
+            cod_prov = true;
+            return this;
+        }
+
+        public IndexBuilder ind_actividad_cliente() {
+            ind_actividad_cliente = true;
+            return this;
+        }
+
+        public IndexBuilder renta() {
+            renta = true;
+            return this;
+        }
+
+        public IndexBuilder segmento() {
+            segmento = true;
+            return this;
+        }
+
+        public IndexBuilder ncodpers() {
+            ncodpers = true;
+            return this;
+        }
+
+        public IndexBuilder nomprov() {
+            nomprov = true;
+            return this;
+        }
+
+        public Index build() {
+            Index index = new Index();
+            index.sexoPresent = sexo;
+            index.ind_empleadoPresent = ind_empleado;
+            index.pais_residenciaPresent = pais_residencia;
+            index.agePresent = age;
+            index.ind_nuevoPresent = ind_nuevo;
+            index.antiguedadPresent = antiguedad;
+            index.conyuempPresent = conyuemp;
+            index.cod_provPresent = cod_prov;
+            index.rentaPresent = renta;
+            index.segmentoPresent = segmento;
+            index.ncodpersPresent = ncodpers;
+            index.nomprovPresent = nomprov;
+            index.indresiPresent = indresi;
+            index.ind_actividad_clientePresent = ind_actividad_cliente;
+            return index;
+        }
     }
 
     public Index() {
@@ -70,6 +163,8 @@ public class Index {
         if (segmentoPresent) parts.add(client.segmento);
         if (ncodpersPresent) parts.add(client.ncodpers + "");
         if (nomprovPresent) parts.add(client.nomprov);
+        if (indresiPresent) parts.add(client.indresi);
+        if (ind_actividad_clientePresent) parts.add(client.ind_actividad_cliente ? "1" : "0");
         return String.join(",", parts);
     }
 
@@ -86,6 +181,29 @@ public class Index {
         index.rentaPresent = Utils.randomBoolean();
         index.segmentoPresent = Utils.randomBoolean();
         index.ncodpersPresent = Utils.randomBoolean();
+        index.indresiPresent = Utils.randomBoolean();
+        index.ind_actividad_clientePresent = Utils.randomBoolean();
+        index.nomprovPresent = Utils.randomBoolean();
         return index;
+    }
+
+    @Override
+    public String toString() {
+        return "Index{" +
+                "sexoPresent=" + sexoPresent +
+                ", ind_empleadoPresent=" + ind_empleadoPresent +
+                ", pais_residenciaPresent=" + pais_residenciaPresent +
+                ", agePresent=" + agePresent +
+                ", ind_nuevoPresent=" + ind_nuevoPresent +
+                ", antiguedadPresent=" + antiguedadPresent +
+                ", conyuempPresent=" + conyuempPresent +
+                ", cod_provPresent=" + cod_provPresent +
+                ", ind_actividad_clientePresent=" + ind_actividad_clientePresent +
+                ", rentaPresent=" + rentaPresent +
+                ", segmentoPresent=" + segmentoPresent +
+                ", ncodpersPresent=" + ncodpersPresent +
+                ", nomprovPresent=" + nomprovPresent +
+                ", indresiPresent=" + indresiPresent +
+                '}';
     }
 }
