@@ -171,6 +171,7 @@ public abstract class Strategy {
         client.antiguedad = nextLine[8].trim().matches("[0-9]+") ? Integer.parseInt(nextLine[8].trim()) : null;
         client.conyuemp = nextLine[15].trim().equals("1");
         client.cod_prov = nextLine[19].trim();
+        client.nomprov = nextLine[20].trim();
         client.renta = nextLine[22].trim().matches("[0-9\\.]+") ? (int) (Double.parseDouble(nextLine[22].trim()) / 1000) : null;
         client.segmento = nextLine[23].trim();
     }

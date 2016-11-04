@@ -29,6 +29,8 @@ public class Client {
 
     public String cod_prov;
 
+    public String nomprov;
+
     public Integer renta;
 
     public String segmento;

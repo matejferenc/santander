@@ -31,7 +31,14 @@ public class Index {
 
     boolean segmentoPresent;
 
-    public Index(boolean sexoPresent, boolean ind_empleadoPresent, boolean pais_residenciaPresent, boolean agePresent, boolean ind_nuevoPresent, boolean antiguedadPresent, boolean conyuempPresent, boolean cod_provPresent, boolean rentaPresent, boolean segmentoPresent) {
+    boolean ncodpersPresent;
+
+    boolean nomprovPresent;
+
+    public Index(boolean sexoPresent, boolean ind_empleadoPresent, boolean pais_residenciaPresent,
+                 boolean agePresent, boolean ind_nuevoPresent, boolean antiguedadPresent,
+                 boolean conyuempPresent, boolean cod_provPresent, boolean rentaPresent, boolean segmentoPresent,
+                 boolean ncodpersPresent, boolean nomprovPresent) {
         this.sexoPresent = sexoPresent;
         this.ind_empleadoPresent = ind_empleadoPresent;
         this.pais_residenciaPresent = pais_residenciaPresent;
@@ -42,6 +49,8 @@ public class Index {
         this.cod_provPresent = cod_provPresent;
         this.rentaPresent = rentaPresent;
         this.segmentoPresent = segmentoPresent;
+        this.ncodpersPresent = ncodpersPresent;
+        this.nomprovPresent = nomprovPresent;
     }
 
     public Index() {
@@ -59,23 +68,9 @@ public class Index {
         if (cod_provPresent) parts.add(client.cod_prov);
         if (rentaPresent) parts.add("" + client.renta);
         if (segmentoPresent) parts.add(client.segmento);
+        if (ncodpersPresent) parts.add(client.ncodpers + "");
+        if (nomprovPresent) parts.add(client.nomprov);
         return String.join(",", parts);
-    }
-
-    @Override
-    public String toString() {
-        return "Index{" +
-                "sexoPresent=" + sexoPresent +
-                ", ind_empleadoPresent=" + ind_empleadoPresent +
-                ", pais_residenciaPresent=" + pais_residenciaPresent +
-                ", agePresent=" + agePresent +
-                ", ind_nuevoPresent=" + ind_nuevoPresent +
-                ", antiguedadPresent=" + antiguedadPresent +
-                ", conyuempPresent=" + conyuempPresent +
-                ", cod_provPresent=" + cod_provPresent +
-                ", rentaPresent=" + rentaPresent +
-                ", segmentoPresent=" + segmentoPresent +
-                '}';
     }
 
     static Index random() {
@@ -90,6 +85,7 @@ public class Index {
         index.cod_provPresent = Utils.randomBoolean();
         index.rentaPresent = Utils.randomBoolean();
         index.segmentoPresent = Utils.randomBoolean();
+        index.ncodpersPresent = Utils.randomBoolean();
         return index;
     }
 }
